@@ -1,0 +1,73 @@
+.candidate-lists {
+  padding: 3% 2%;
+}
+
+table {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.unschdule-table,.schdule-table {
+  padding: 2%;
+}
+
+hr {
+  border-top-color: #fff;
+  border-width: 2px;
+}
+
+.table-heading {
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.m-b-5 {
+  margin-bottom: 5px;
+}
+
+.svg-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: #4691f6;
+}
+
+.svg-icon circle {
+  stroke: #4691f6;
+  stroke-width: 1;
+}
+
+.cdk-drag-preview {
+  display: flex;
+  background: #fff;
+  align-items: center;
+  flex: 1 1 0%;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-preview .mat-cell {
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom-style: none;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  width: 100%;
+}
+
+.cdk-drop-list-dragging .mat-row:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

@@ -1,0 +1,161 @@
+<div
+  fxLayout="row"
+  class="candidate-lists"
+  >
+
+  <div fxFlex class="unschdule-table">
+    <h5 class="table-heading">Unscheduled Candidate List</h5>
+    <hr>
+    <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8"
+    cdkDropList
+    #unScheduledList="cdkDropList"
+    [cdkDropListData]="dataSource"
+    [cdkDropListConnectedTo]="[scheduledList]"
+    (cdkDropListDropped)="dropTable($event)">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Qualification Column -->
+    <ng-container matColumnDef="qualification">
+      <th mat-header-cell *matHeaderCellDef> Qualification </th>
+      <td mat-cell *matCellDef="let element"> {{element.qualification}} </td>
+    </ng-container>
+
+    <!-- Year Of Experience Column -->
+    <ng-container matColumnDef="yearsOfExp">
+      <th mat-header-cell *matHeaderCellDef> Year Of Experience </th>
+      <td mat-cell *matCellDef="let element"> {{element.yearsOfExp}} </td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Scheduled Date </th>
+      <td mat-cell *matCellDef="let element">
+        <button *ngIf="!element.date" mat-button color="accent" (click)="scheduleDate(element)">Schedule</button>
+        <span *ngIf="element.date"> {{element.date | date: 'M/d/yy, h:mm a'}} </span>
+      </td>
+    </ng-container>
+
+    <!-- Info Column -->
+    <ng-container matColumnDef="info">
+      <th mat-header-cell *matHeaderCellDef> Info </th>
+      <td mat-cell *matCellDef="let element">
+        <svg class="svg-icon" viewBox="0 0 20 20" [ngbPopover]="popContent" [popoverTitle]="popTitle" triggers="hover">
+          <path fill="none" d="M19.471,8.934L18.883,8.34c-2.096-2.14-4.707-4.804-8.903-4.804c-4.171,0-6.959,2.83-8.996,4.897L0.488,8.934c-0.307,0.307-0.307,0.803,0,1.109l0.401,0.403c2.052,2.072,4.862,4.909,9.091,4.909c4.25,0,6.88-2.666,8.988-4.807l0.503-0.506C19.778,9.737,19.778,9.241,19.471,8.934z M9.98,13.787c-3.493,0-5.804-2.254-7.833-4.3C4.182,7.424,6.493,5.105,9.98,5.105c3.536,0,5.792,2.301,7.784,4.332l0.049,0.051C15.818,11.511,13.551,13.787,9.98,13.787z"></path>
+          <circle fill="none" cx="9.98" cy="9.446" r="1.629"></circle>
+        </svg>
+
+        <ng-template #popTitle>
+          {{element.name}}
+        </ng-template>
+
+        <ng-template #popContent>
+          <div fxLayout="column" fxLayoutAlign="space-between center">
+            <div fxFlex class="m-b-5"><img [src]="element.image" style="width: 50px; height: 50px;"></div>
+            <div fxFlex>{{element.email}}</div>
+            <div fxFlex class="m-b-5">{{element.number}}</div>
+          </div>
+        </ng-template>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"></tr>
+    </table>
+  </div>
+
+
+  <div fxFlex class="schdule-table">
+    <h5 class="table-heading">Scheduled Candidate List</h5>
+    <hr>
+    <table mat-table #table2 [dataSource]="dataSource2" class="mat-elevation-z8"
+    cdkDropList
+    #scheduledList="cdkDropList"
+    [cdkDropListData]="dataSource2"
+    [cdkDropListConnectedTo]="[unScheduledList]"
+    (cdkDropListDropped)="dropTable($event)" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Qualification Column -->
+    <ng-container matColumnDef="qualification">
+      <th mat-header-cell *matHeaderCellDef> Qualification </th>
+      <td mat-cell *matCellDef="let element"> {{element.qualification}} </td>
+    </ng-container>
+
+    <!-- Year of Experience Column -->
+    <ng-container matColumnDef="yearsOfExp">
+      <th mat-header-cell *matHeaderCellDef> Year Of Experience </th>
+      <td mat-cell *matCellDef="let element"> {{element.yearsOfExp}} </td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortScheduledDate(dataSource2)"> Scheduled Date </th>
+      <td mat-cell *matCellDef="let element">
+        <button *ngIf="!element.date" mat-button color="accent" (click)="scheduleDate(element)">Schedule</button>
+        <span *ngIf="element.date"> {{element.date | date: 'M/d/yy, h:mm a'}} </span>
+      </td>
+    </ng-container>
+
+    <!-- Info Column -->
+    <ng-container matColumnDef="info">
+      <th mat-header-cell *matHeaderCellDef> Info </th>
+      <td mat-cell *matCellDef="let element">
+        <svg class="svg-icon" viewBox="0 0 20 20" [ngbPopover]="popContent" [popoverTitle]="popTitle" triggers="hover">
+          <path fill="none" d="M19.471,8.934L18.883,8.34c-2.096-2.14-4.707-4.804-8.903-4.804c-4.171,0-6.959,2.83-8.996,4.897L0.488,8.934c-0.307,0.307-0.307,0.803,0,1.109l0.401,0.403c2.052,2.072,4.862,4.909,9.091,4.909c4.25,0,6.88-2.666,8.988-4.807l0.503-0.506C19.778,9.737,19.778,9.241,19.471,8.934z M9.98,13.787c-3.493,0-5.804-2.254-7.833-4.3C4.182,7.424,6.493,5.105,9.98,5.105c3.536,0,5.792,2.301,7.784,4.332l0.049,0.051C15.818,11.511,13.551,13.787,9.98,13.787z"></path>
+          <circle fill="none" cx="9.98" cy="9.446" r="1.629"></circle>
+        </svg>
+
+        <ng-template #popTitle>
+          {{element.name}}
+        </ng-template>
+
+        <ng-template #popContent>
+          <div fxLayout="column" fxLayoutAlign="space-between center">
+            <div fxFlex class="m-b-5"><img [src]="element.image" style="width: 50px; height: 50px;"></div>
+            <div fxFlex>{{element.email}}</div>
+            <div fxFlex class="m-b-5">{{element.number}}</div>
+          </div>
+        </ng-template>
+      </td>
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns2;" cdkDrag [cdkDragData]="row"></tr>
+    </table>
+  </div>
+
+</div>

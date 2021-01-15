@@ -1,0 +1,22 @@
+<div class="schedule-date-card">
+
+  <h5>Schedule Date and Time</h5>
+
+  <form
+  name="profileForm"
+  [formGroup]="scheduleForm"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  (ngSubmit)="updateDateTime()"
+  >
+
+  <label>
+    <span>Date Time:</span>
+    <input [owlDateTimeTrigger]="dt" [owlDateTime]="dt" [min]="todayDate" formControlName="scheduleDateTime">
+    <owl-date-time #dt></owl-date-time>
+  </label>
+
+  </form>
+
+</div>
+<button mat-raised-button color="accent" (click)="updateDateTime()">SAVE</button>
